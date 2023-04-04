@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .login-div{
+        transition: 2s all;
+    }
+    .time{
+        display: none;
+    }
+    .display{
+        background-color: efefef;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height:100vh ;
+        display: none;
+        transition: 2s all;
+    }
+    .display h1{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: darkorange;
+    }
+</style>
+<body>
+<div class="login-div">
+    <div class="time">
+
+    </div>
+    <input type="text" id="password">
+    <div class="msg"> Locked</div>
+</div>
+<div class="display">
+   <h1>you are login</h1> 
+</div>
+<script>
+       let timediv = document.querySelector(".time");
+           
+
+
+
+function currentTime(){
+    let time = new Date();
+
+           timediv.innerHTML = time.getHours() +""+ time.getMinutes()
+  let t = setTimeout(function(){ currentTime() }, 1000);
+}
+ currentTime();
+
+let password = document.getElementById("password");
+
+
+password.addEventListener("input",
+
+function(){
+    let msg = document.querySelector(".msg");
+    if (password.value == timediv.innerHTML) {
+    msg.innerHTML = "yes unlocked";
+    setTimeout(() => {
+        document.querySelector(".display").style = "display:flex";
+    }, 1000);
+    document.querySelector(".login-div").style = "display:none";
+ }else{
+    msg.innerHTML = "Locked";
+ }
+})
+//            function currentTime() {
+//   let date = new Date(); 
+//   let hh = date.getHours();
+//   let mm = date.getMinutes();
+//   let ss = date.getSeconds();
+//   let session = "AM";
+
+//   if(hh === 0){
+//       hh = 12;
+//   }
+//   if(hh > 12){
+//       hh = hh - 12;
+//       session = "PM";
+//    }
+
+//    hh = (hh < 10) ? "0" + hh : hh;
+//    mm = (mm < 10) ? "0" + mm : mm;
+//    ss = (ss < 10) ? "0" + ss : ss;
+    
+//    let time = hh + ":" + mm + ":" + ss + " " + session;
+
+//   timediv.innerText = time; 
+//   let t = setTimeout(function(){ currentTime() }, 1000);
+// }
+
+    </script>
+</body>
+</html>
