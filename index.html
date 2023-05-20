@@ -10,9 +10,7 @@
     .login-div{
         transition: 2s all;
     }
-    .time{
-        display: none;
-    }
+   
     .display{
         background-color: efefef;
         display: flex;
@@ -29,9 +27,7 @@
 </style>
 <body>
 <div class="login-div">
-    <div class="time">
 
-    </div>
     <input type="text" id="password">
     <div class="msg"> Locked</div>
 </div>
@@ -39,15 +35,24 @@
    <h1>you are login</h1> 
 </div>
 <script>
-       let timediv = document.querySelector(".time");
-           
+       let timediv;
+    let ForOneto24;
 
 
 
 function currentTime(){
     let time = new Date();
+    let hour = time.getHours();
+    if(hour > 12){
+        hour = hour - 12
 
-           timediv.innerHTML = time.getHours() +""+ time.getMinutes()
+    }
+           timediv = hour +""+ time.getMinutes()
+           ForOneto24 = time.getHours() +""+ time.getMinutes()
+
+           console.log(hour)
+
+           
   let t = setTimeout(function(){ currentTime() }, 1000);
 }
  currentTime();
@@ -59,13 +64,21 @@ password.addEventListener("input",
 
 function(){
     let msg = document.querySelector(".msg");
-    if (password.value == timediv.innerHTML) {
+    if (password.value == timediv) {
     msg.innerHTML = "yes unlocked";
     setTimeout(() => {
         document.querySelector(".display").style = "display:flex";
     }, 1000);
     document.querySelector(".login-div").style = "display:none";
- }else{
+ }else if(password.value == ForOneto24) {
+    msg.innerHTML = "yes unlocked";
+    setTimeout(() => {
+        document.querySelector(".display").style = "display:flex";
+    }, 1000);
+    document.querySelector(".login-div").style = "display:none";
+ }
+
+ else{
     msg.innerHTML = "Locked";
  }
 })
